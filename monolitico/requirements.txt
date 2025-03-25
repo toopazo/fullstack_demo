@@ -1,0 +1,35 @@
+# General purpose
+pipreqs
+pandas
+numpy
+pandasql
+PyYAML
+python-dotenv
+matplotlib
+seaborn
+scikit-learn
+# jupyterlab
+
+# Computer vision
+pillow
+opencv-python
+
+# Web
+fastapi
+
+# Database
+psycopg2-binary
+
+# Huggingface
+# datasets[vision]
+# transformers
+# accelerate
+# evaluate
+
+# torch
+# torch
+# torchvision
+
+# AI
+# albumentations 
+# pytesseract
