@@ -1,0 +1,43 @@
+# General purpose
+pipreqs
+pandas
+numpy
+pandasql
+PyYAML
+python-dotenv
+
+# Plotting
+matplotlib
+seaborn
+
+# Machine learning
+scikit-learn
+jupyterlab
+kagglehub
+
+# Computer vision
+pillow
+opencv-python
+
+# Web applications
+# fastapi
+# Web applications - Django
+djangorestframework
+markdown       # Markdown support for the browsable API.
+django-filter  # Filtering support
+
+# Database
+# psycopg2-binary
+
+# Neural netwokrs and Deep learning
+# Neural netwokrs and Deep learning - Huggingface
+# datasets[vision]
+# transformers
+# accelerate
+# evaluate
+# Neural netwokrs and Deep learning - torch
+# torch
+# torchvision
+# Neural netwokrs and Deep learning - others
+# albumentations 
+# pytesseract
