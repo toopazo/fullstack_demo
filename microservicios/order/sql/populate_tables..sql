@@ -6,9 +6,21 @@ select *
 select current_timestamp
   from dual;
 
-insert into menu ( name ) values ( 'Papas fritas con pollo al jugo' );
-insert into menu ( name ) values ( 'Papas fritas con bistec' );
-insert into menu ( name ) values ( 'Papas mayo con bistec' );
+insert into menu (
+   name,
+   created_at
+) values ( 'Papas fritas con pollo al jugo',
+           current_timestamp );
+insert into menu (
+   name,
+   created_at
+) values ( 'Papas fritas con bistec',
+           current_timestamp );
+insert into menu (
+   name,
+   created_at
+) values ( 'Papas mayo con bistec',
+           current_timestamp );
 
 select *
   from menu;

@@ -19,17 +19,17 @@ public class OrderModel implements Serializable {
 
 }
 
-// public class Order implements Serializable {
+// public class OrderModel implements Serializable {
 
 // // private static final long serialVersionUID = -3760445487636086034L;
 // private String name;
 // private int id;
 // private LocalDateTime createdAt;
 
-// public Order() {
+// public OrderModel() {
 // }
 
-// public Order(String name, int id, LocalDateTime createdAt) {
+// public OrderModel(String name, int id, LocalDateTime createdAt) {
 // this.name = name;
 // this.id = id;
 // this.createdAt = createdAt;

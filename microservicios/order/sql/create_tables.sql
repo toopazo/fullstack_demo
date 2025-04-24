@@ -6,6 +6,11 @@ select *
 select current_timestamp
   from dual;
 
+-- //////////////////////////////////////////
+-- Create tables
+-- //////////////////////////////////////////
+
+
 create sequence products_seq start with 1 increment by 1 nocache nocycle;
 
 drop table menu;
@@ -56,6 +61,37 @@ create table client_order (
    foreign key ( client_id )
       references client ( id )
 );
+
+-- //////////////////////////////////////////
+-- Insert data
+-- //////////////////////////////////////////
+
+insert into menu (
+   name,
+   created_at
+) values ( 'Papas fritas con pollo al jugo',
+           current_timestamp );
+insert into menu (
+   name,
+   created_at
+) values ( 'Papas fritas con bistec',
+           current_timestamp );
+insert into menu (
+   name,
+   created_at
+) values ( 'Ensalada de papas mayo con bistec',
+           current_timestamp );
+
+select *
+  from user_tables;
+
+select *
+  from menu;
+
+desc menu;
+
+
+  
 
 -- """
 -- Script para definir los servicios básicos de la db

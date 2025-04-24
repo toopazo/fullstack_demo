@@ -28,6 +28,9 @@ django-filter  # Filtering support
 
 # Database
 # psycopg2-binary
+sqlalchemy
+cx_oracle
+oracledb
 
 # Neural netwokrs and Deep learning
 # Neural netwokrs and Deep learning - Huggingface

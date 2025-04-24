@@ -29,15 +29,16 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
+	
 	runtimeOnly 'com.oracle.database.security:osdt_core'
 	runtimeOnly 'com.oracle.database.security:osdt_cert'
 	runtimeOnly 'com.oracle.database.security:oraclepki'
 	// runtimeOnly 'org.hibernate:hibernate-core'
 	// runtimeOnly 'org.hibernate.orm:hibernate-community-dialects'
 	// implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
