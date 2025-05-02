@@ -27,12 +27,14 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	implementation 'org.postgresql:postgresql'
+	// runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
+	// runtimeOnly 'com.oracle.database.security:osdt_core'
+	// runtimeOnly 'com.oracle.database.security:osdt_cert'
+	// runtimeOnly 'com.oracle.database.security:oraclepki'
 	
-	runtimeOnly 'com.oracle.database.security:osdt_core'
-	runtimeOnly 'com.oracle.database.security:osdt_cert'
-	runtimeOnly 'com.oracle.database.security:oraclepki'
 	// runtimeOnly 'org.hibernate:hibernate-core'
 	// runtimeOnly 'org.hibernate.orm:hibernate-community-dialects'
 	// implementation 'org.springframework.boot:spring-boot-starter-security'

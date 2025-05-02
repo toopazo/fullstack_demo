@@ -13,10 +13,6 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class MenuService {
-    // This class will contain the business logic for managing menus
-    // It will use the MenuRepository to interact with the database
-    // and perform CRUD operations on the Menu entity.
-
     @Autowired
     private MenuRepository menuRepository;
 

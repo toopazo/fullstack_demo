@@ -3,7 +3,8 @@ package cl.dsy1103.order.controller;
 import java.util.List;
 import java.time.LocalDateTime;
 
-import cl.dsy1103.order.model.OrderModel;
+import cl.dsy1103.order.model.Menu;
+import cl.dsy1103.order.model.Order;
 import cl.dsy1103.order.services.OrderService;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
@@ -25,39 +28,48 @@ public class OrderController {
 	private int counter = 0;
 
 	@GetMapping("")
-	public List<OrderModel> getOrders() {
+	public List<Order> getOrders() {
 		return orderService.getOrders();
 	}
 
 	// Create POST
 	@PostMapping("")
-	public OrderModel postOrder(@RequestBody OrderModel order) {
+	public ResponseEntity<Order> postOrder(@RequestBody Order order) {
 		// int id = orderService.getOrders().size() + 1;
 		int id = ++counter;
 		order.setId(id);
 		order.setCreatedAt(LocalDateTime.now());
 		orderService.addOrder(order);
-		return order;
+		// return order;
+
+		// Build the URI for the new resource
+		// URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+		// .path("/{id}")
+		// .buildAndExpand(savedMenuId)
+		// .toUri();
+		// return ResponseEntity.created(location).body(savedMenu);
+
+		return new ResponseEntity<>(order, HttpStatus.CREATED);
 	}
 
 	// Read GET
 	@GetMapping("{id}")
-	public OrderModel getOrderById(@PathVariable int id) {
-		OrderModel order = orderService.getOrderById(id);
+	public Order getOrderById(@PathVariable int id) {
+		Order order = orderService.getOrderById(id);
 		return order;
 	}
 
 	// Update PUT
 	@PutMapping("{id}")
-	public OrderModel putOrderById(@PathVariable int id, @RequestBody OrderModel order) {
-		orderService.updateOrder(id, order);
-		return order;
+	public void putOrderById(@PathVariable int id) {
+		orderService.updateOrder(id);
+		return;
 	}
 
 	// Delete DELETE
 	@DeleteMapping("{id}")
-	public OrderModel deleteOrderById(@PathVariable int id) {
-		OrderModel order = orderService.getOrderById(id);
+	public Order deleteOrderById(@PathVariable int id) {
+		Order order = orderService.getOrderById(id);
 		orderService.deleteOrder(id);
 		return order;
 	}

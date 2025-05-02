@@ -7,14 +7,34 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "dinner_order")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderModel implements Serializable {
+public class Order implements Serializable {
 
-    // private static final long serialVersionUID = -3760445487636086034L;
-    private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "menu_id", nullable = false)
+    private int menuId;
+
+    @Column(name = "table_id", nullable = false)
+    private int tableId;
+
+    @Column(name = "menu_count", nullable = false)
+    private int menuCount;
+
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
 }

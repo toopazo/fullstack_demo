@@ -1,43 +1,65 @@
 package cl.dsy1103.order.repository;
 
-import cl.dsy1103.order.model.OrderModel;
-import org.springframework.stereotype.Repository;
+import cl.dsy1103.order.model.Order;
 
 import java.util.List;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 @Repository
-public class OrderRepository {
-    private List<OrderModel> orders = new ArrayList<>();
+public interface OrderRepository extends JpaRepository<Order, Integer> {
 
-    public List<OrderModel> getOrders() {
-        return orders;
-    }
+    // List<Order> findAll(); // This method is inherited from JpaRepository
 
-    public void addOrder(OrderModel order) {
-        orders.add(order);
-    }
+    List<Order> findByCreatedAt(LocalDateTime createdAt); // This method is inherited from JpaRepository
 
-    public OrderModel getOrderById(int id) {
-        for (OrderModel order : orders) {
-            if (order.getId() == id) {
-                return order;
-            }
-        }
-        return null; // or throw an exception
-    }
+    // @Query("SELECT m FROM dinner_order m WHERE m.menu_id = 'id'")
+    // List<Order> findByMenuId(int id); // Custom query to find menus by name
+    // pattern
 
-    public void updateOrder(int id, OrderModel updatedOrder) {
-        for (int i = 0; i < orders.size(); i++) {
-            if (orders.get(i).getId() == id) {
-                orders.set(i, updatedOrder);
-                return;
-            }
-        }
-        // throw an exception if order not found
-    }
-
-    public void deleteOrder(int id) {
-        orders.removeIf(order -> order.getId() == id);
-    }
+    @Query(value = "select * from  dinner_order", nativeQuery = true)
+    List<Order> findAllOrders(); // Custom query to find all menus
 }
+
+// @Repository
+// public class OrderRepository {
+// private List<Order> orders = new ArrayList<>();
+
+// public List<Order> getOrders() {
+// return orders;
+// }
+
+// public void addOrder(Order order) {
+// orders.add(order);
+// }
+
+// public Order getOrderById(int id) {
+// for (Order order : orders) {
+// if (order.getId() == id) {
+// return order;
+// }
+// }
+// return null; // or throw an exception
+// }
+
+// public void updateOrder(int id, Order updatedOrder) {
+// for (int i = 0; i < orders.size(); i++) {
+// if (orders.get(i).getId() == id) {
+// orders.set(i, updatedOrder);
+// return;
+// }
+// }
+// // throw an exception if order not found
+// }
+
+// public void deleteOrder(int id) {
+// orders.removeIf(order -> order.getId() == id);
+// }
+
+// public int getNumberOfOrders() {
+// return orders.size();
+// }
+// }
