@@ -3,7 +3,6 @@ package cl.dsy1103.order.controller;
 import java.util.List;
 import java.time.LocalDateTime;
 
-import cl.dsy1103.order.model.Menu;
 import cl.dsy1103.order.model.Order;
 import cl.dsy1103.order.services.OrderService;
 
@@ -54,21 +53,21 @@ public class OrderController {
 
 	// Read GET
 	@GetMapping("{id}")
-	public Order getOrderById(@PathVariable int id) {
+	public ResponseEntity<Order> getOrderById(@PathVariable("id") int id) {
 		Order order = orderService.getOrderById(id);
-		return order;
+		return ResponseEntity.ok(order);
 	}
 
 	// Update PUT
 	@PutMapping("{id}")
-	public void putOrderById(@PathVariable int id) {
+	public void putOrderById(@PathVariable("id") int id) {
 		orderService.updateOrder(id);
 		return;
 	}
 
 	// Delete DELETE
 	@DeleteMapping("{id}")
-	public Order deleteOrderById(@PathVariable int id) {
+	public Order deleteOrderById(@PathVariable("id") int id) {
 		Order order = orderService.getOrderById(id);
 		orderService.deleteOrder(id);
 		return order;
