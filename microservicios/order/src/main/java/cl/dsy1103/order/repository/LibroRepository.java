@@ -1,43 +1,29 @@
 package cl.dsy1103.order.repository;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
-import org.springframework.stereotype.Repository;
+
 import cl.dsy1103.order.model.Libro;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
 @Repository
-public class LibroRepository {
-    private List<Libro> libros = new ArrayList<>();
+public interface LibroRepository extends JpaRepository<Libro, Integer> {
 
-    public List<Libro> getLibros() {
-        return libros;
-    }
+    // List<Libro> findAll(); // This method is inherited from JpaRepository
 
-    public void addLibro(Libro libro) {
-        libros.add(libro);
-    }
+    // List<Libro> findByName(String name); // This method is inherited from
+    // JpaRepository
 
-    public Libro getLibroById(int id) {
-        for (Libro libro : libros) {
-            if (libro.getId() == id) {
-                return libro;
-            }
-        }
-        return null; // or throw an exception
-    }
+    // List<Libro> findByCreatedAt(LocalDateTime createdAt); // This method is
+    // inherited from JpaRepository
 
-    public Libro updateLibro(Libro updatedLibro) {
-        int id = updatedLibro.getId();
-        for (int i = 0; i < libros.size(); i++) {
-            if (libros.get(i).getId() == id) {
-                libros.set(i, updatedLibro);
-                return updatedLibro;
-            }
-        }
-        return null; // or throw an exception
-    }
+    // @Query("SELECT m FROM libro m WHERE m.name LIKE '%:pattern%'")
+    // List<Libro> findByNameLike(String pattern); // Custom query to find menus by
+    // name pattern
 
-    public void deleteLibro(int id) {
-        libros.removeIf(libro -> libro.getId() == id);
-    }
+    @Query(value = "select * from libro", nativeQuery = true)
+    List<Libro> findAllMenus(); // Custom query to find all menus
 }

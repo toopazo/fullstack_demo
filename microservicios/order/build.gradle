@@ -4,7 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
-group = 'com.example'
+group = 'cl.dsy1103'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -39,6 +39,11 @@ dependencies {
 	// runtimeOnly 'org.hibernate.orm:hibernate-community-dialects'
 	// implementation 'org.springframework.boot:spring-boot-starter-security'
 
+	// implementation 'org.springframework.cloud:spring-cloud-starter-aws-secrets-manager-config'
+	// implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	// implementation 'com.amazonaws.secretsmanager:aws-secretsmanager-jdbc:1.12.83'
+	// implementation 'io.awspring.cloud:spring-cloud-starter-aws-secrets-manager-config:2.3.3'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
@@ -46,3 +51,4 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
