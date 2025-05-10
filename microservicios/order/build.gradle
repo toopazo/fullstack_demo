@@ -40,10 +40,6 @@ dependencies {
 	// implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	// AWS Secrets Manager
-	// implementation 'org.springframework.cloud:spring-cloud-starter-aws-secrets-manager-config'
-	// implementation 'org.springframework.cloud:spring-cloud-starter-config'
-	// implementation 'com.amazonaws.secretsmanager:aws-secretsmanager-jdbc:1.12.83'
-
 	// https://refactorfirst.com/spring-boot-fetch-secrets-from-aws-secrets-manager
 	implementation 'io.awspring.cloud:spring-cloud-aws-dependencies:3.3.0'
 	implementation 'io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:3.3.0'
