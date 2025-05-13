@@ -1,2 +1,1 @@
-git clone https://github.com/toopazo/fullstack_demo.git
-cd fullstack_demo/microservicios/order
+aws cloudformation create-stack --stack-name orderApplication --template-body file://aws_cloudformation.yaml
