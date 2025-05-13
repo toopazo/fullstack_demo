@@ -1,26 +1,15 @@
 package cl.dsy1103.order;
 
-import java.io.StringReader;
 import java.util.Properties;
-import java.util.Scanner;
 
 import lombok.extern.log4j.Log4j2;
 
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.env.AbstractEnvironment;
-import org.springframework.core.env.MutablePropertySources;
-import org.springframework.core.env.Environment;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.annotation.JsonAppend.Prop;
 
-// import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
-// import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRequest;
-// import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueResponse;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRequest;
@@ -31,11 +20,19 @@ import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRespon
 public class OrderApplication {
 
 	public static void main(String[] args) {
-		getSecret(args);
+		JsonNode node = getSecrets();
+
+		Properties properties = setApplicationProperties(node);
+		log.info(properties);
+
+		SpringApplication application = new SpringApplication(OrderApplication.class);
+		application.setDefaultProperties(properties); // Set properties before run
+		application.run(args);
+
 		// SpringApplication.run(OrderApplication.class, args);
 	}
 
-	public static void getSecret(String[] args) {
+	public static JsonNode getSecrets() {
 
 		String secretName = "neondb-for-DSY1103";
 		Region region = Region.of("us-east-2");
@@ -78,10 +75,33 @@ public class OrderApplication {
 			e.printStackTrace();
 		}
 
-		log.info("host: " + node.get("host").asText());
-		log.info("username: " + node.get("username").asText());
-		log.info("password: " + node.get("password").asText());
-		log.info("port: " + node.get("port").asText());
+		return node;
+	}
+
+	public static void setApplicationPropertiesOracle() {
+
+		// # ORACLE DB
+		// # spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
+		// #
+		// spring.datasource.url=jdbc:oracle:thin:@cbicn24vcdndg5uc_high?TNS_ADMIN=${DB_ORACLE_WALLET_DIR}
+		// # spring.datasource.username=ADMIN
+		// # spring.datasource.password=${DB_ORACLE_PASS}
+
+		// # ORACLE DB
+		// # spring.jpa.hibernate.ddl-auto=<create | create-drop | update | validate |
+		// none>
+		// # spring.jpa.hibernate.ddl-auto=update
+		// # spring.jpa.show-sql=true
+		// # spring.jpa.properties.hibernate.format_sql=true
+		// # spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.OracleDialect
+	}
+
+	public static Properties setApplicationProperties(JsonNode node) {
+
+		// log.info("host: " + node.get("host").asText());
+		// log.info("username: " + node.get("username").asText());
+		// log.info("password: " + node.get("password").asText());
+		// log.info("port: " + node.get("port").asText());
 
 		Properties properties = new Properties();
 
@@ -90,9 +110,9 @@ public class OrderApplication {
 		properties.put("spring.application.name", "order");
 		properties.put("server.port", "8082");
 
-		// spring.datasource.url=jdbc:postgresql://${DB_NEON_HOST}:${DB_NEON_PORT}/${DB_NEON_NAME}
-		// spring.datasource.username=${DB_NEON_ADMIN}
-		// spring.datasource.password=${DB_NEON_PASS}
+		// spring.datasource.url=jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+		// spring.datasource.username=${DB_ADMIN}
+		// spring.datasource.password=${DB_PASS}
 		String url = "jdbc:postgresql://" + node.get("host").asText() + ":" + node.get("port").asText() + "/"
 				+ node.get("dbname").asText();
 		properties.put("spring.datasource.url", url);
@@ -106,12 +126,11 @@ public class OrderApplication {
 		properties.put("spring.jpa.show-sql", "true");
 		properties.put("spring.jpa.properties.hibernate.format_sql", "true");
 
-		log.info(properties);
+		// Logging
+		// logging.level.org.hibernate=DEBUG
+		// logging.level.com.zaxxer.hikari=DEBUG
+		// logging.level.java.sql=DEBUG
 
-		SpringApplication application = new SpringApplication(OrderApplication.class);
-		application.setDefaultProperties(properties); // Set properties before run
-		application.run(args);
-
+		return properties;
 	}
-
 }

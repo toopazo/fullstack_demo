@@ -7,3 +7,4 @@ Resources:
       KeyName: ec2_id_ed25519
       SecurityGroupIds:
         - sg-02dfb24a262581bd2
+      IamInstanceProfile: iam_ec2_secret_manager
