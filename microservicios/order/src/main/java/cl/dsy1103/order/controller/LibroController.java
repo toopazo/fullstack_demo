@@ -28,8 +28,8 @@ public class LibroController {
 
     @GetMapping("")
     public List<Libro> getLibros() {
+        log.info("Calling external API");
         UFData ufData = libroService.externalRestCall("13-05-2025");
-        // System.out.println("UFData: " + ufData);
         log.info("UFData: " + ufData);
         return libroService.getLibros();
     }
