@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cl.dsy1103.order.services.LibroService;
 import cl.dsy1103.order.model.Libro;
+import cl.dsy1103.order.model.UFData;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,8 @@ public class LibroController {
 
     @GetMapping("")
     public List<Libro> getLibros() {
+        UFData ufData = libroService.externalRestCall("13-05-2025");
+        System.out.println("UFData: " + ufData);
         return libroService.getLibros();
     }
 
