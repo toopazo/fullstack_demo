@@ -2,6 +2,7 @@ package cl.dsy1103.order.controller;
 
 import java.util.List;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 // import org.springframework.web.bind.annotation.RequestParam;
 
+@Log4j2
 @RestController
 @RequestMapping("/api/v1/libros")
 public class LibroController {
@@ -27,7 +29,8 @@ public class LibroController {
     @GetMapping("")
     public List<Libro> getLibros() {
         UFData ufData = libroService.externalRestCall("13-05-2025");
-        System.out.println("UFData: " + ufData);
+        // System.out.println("UFData: " + ufData);
+        log.info("UFData: " + ufData);
         return libroService.getLibros();
     }
 
