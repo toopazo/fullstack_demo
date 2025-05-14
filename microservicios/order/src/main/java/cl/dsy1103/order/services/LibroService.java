@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
 import cl.dsy1103.order.repository.LibroRepository;
+import lombok.extern.log4j.Log4j2;
 import cl.dsy1103.order.model.Libro;
 import cl.dsy1103.order.model.UFData;
 
+@Log4j2
 @Service
 public class LibroService {
     @Autowired
@@ -18,7 +20,9 @@ public class LibroService {
     private final RestClient restClient;
 
     public LibroService(RestClient.Builder restClientBuilder) {
-        this.restClient = restClientBuilder.baseUrl("https://mindicador.cl").build();
+        String baseUrl = "https://mindicador.cl";
+        log.info("Base URL: " + baseUrl);
+        this.restClient = restClientBuilder.baseUrl(baseUrl).build();
     }
 
     public UFData externalRestCall(String date) {
