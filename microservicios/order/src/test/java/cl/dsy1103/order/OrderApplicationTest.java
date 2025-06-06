@@ -1,61 +1,49 @@
-// package cl.dsy1103.order;
+package cl.dsy1103.order;
 
-// import org.junit.jupiter.api.Test;
-// import org.springframework.boot.test.context.SpringBootTest;
-// // import static org.assertj.core.api.Assertions.assertThat;
-// // import org.springframework.beans.factory.annotation.Autowired;
-// // import
-// org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-// // import org.springframework.boot.test.web.client.TestRestTemplate;
-// // import org.springframework.boot.test.web.server.LocalServerPort;
-// // import org.springframework.test.web.servlet.MockMvc;
-// // import
-// org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-// // import static
-// org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+
+import cl.dsy1103.order.controller.LibroController;
 
 // @SpringBootTest
-// // @AutoConfigureMockMvc
-// public class OrderApplicationTest {
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+class OrderApplicationTest {
+    @Autowired
+    private LibroController libroController;
 
-// @Test
-// void contextLoads() {
-// }
+    @LocalServerPort
+    private int port;
 
-// // @Autowired
-// // private MockMvc mockMvc;
+    @Autowired
+    private TestRestTemplate restTemplate;
 
-// // @Autowired
-// // private OrderApplication controller;
+    @Test
+    void contextLoads() {
+        System.out.println("Testing the context loading...");
+        // System.out.println("Server running on port: " + port);
+    }
 
-// // @LocalServerPort
-// // private int port;
+    @Test
+    void contextLoads2() throws Exception {
+        System.out.println("Testing the context loading. and the controller...");
+        assertThat(libroController).isNotNull();
+    }
 
-// // @Autowired
-// // private TestRestTemplate restTemplate;
+    @Test
+    void getLibrosContainsBrackets() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port +
+                "/api/v1/libros",
+                String.class)).toString().contains("[");
+    }
 
-// // @Test
-// // void test1() throws Exception {
-// // assertThat(this.restTemplate.getForObject("http://localhost:" + port +
-// // "/api/v1/libros",
-// // String.class)).contains("[");
-// // }
-
-// // @Test
-// // void contextLoads() throws Exception {
-// // System.out.println("Port: " + port);
-// // // assertThat(controller).isNotNull();
-// // }
-
-// // @Test
-// // public void test0() throws Exception {
-// // // mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/libros"))
-// // // .andDo(result -> {
-// // // String content = result.getResponse().getContentAsString();
-// // // System.out.println("Response content: " + content);
-// // // assertThat(content).contains("[");
-// // // });
-// //
-// mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/libros")).andExpect(status().isOk());
-// // }
-// }
+    // @Test
+    // void shouldReturnDefaultMessage() throws Exception {
+    // this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
+    // .andExpect(content().string(containsString("Hello, World")));
+    // }
+}

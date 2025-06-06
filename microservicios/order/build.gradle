@@ -29,7 +29,9 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
+	// https://www.datafaker.net/documentation/getting-started/
 	implementation 'net.datafaker:datafaker:2.4.2'
+	// implementation 'org.mockito:mockito-all'
 
 	// annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
