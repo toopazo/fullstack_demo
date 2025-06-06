@@ -29,6 +29,10 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
+	implementation 'net.datafaker:datafaker:2.4.2'
+
+	// annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
 	implementation 'org.postgresql:postgresql'
 	// runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
 	// runtimeOnly 'com.oracle.database.security:osdt_core'
@@ -46,6 +50,8 @@ dependencies {
 	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	
 }
 
 tasks.named('test') {

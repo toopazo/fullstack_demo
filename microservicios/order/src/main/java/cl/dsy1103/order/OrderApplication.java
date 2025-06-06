@@ -1,7 +1,5 @@
 package cl.dsy1103.order;
 
-import java.util.Properties;
-
 import lombok.extern.log4j.Log4j2;
 
 import org.springframework.boot.SpringApplication;
