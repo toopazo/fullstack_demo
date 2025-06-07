@@ -14,7 +14,7 @@ import java.time.LocalDate;
 // Ver detalles de Profile en Spring Boot en la siguiente URL: https://docs.spring.io/spring-boot/reference/features/profiles.html
 // @Profile("dev")
 // @Profile("prod")
-@Profile("do_not_run")
+@Profile("non_standard_profile_so_this_it_will_not_run")
 @Component
 public class DataLoader implements CommandLineRunner {
     @Autowired
