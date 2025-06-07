@@ -29,6 +29,12 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
+	// https://www.datafaker.net/documentation/getting-started/
+	implementation 'net.datafaker:datafaker:2.4.2'
+	// implementation 'org.mockito:mockito-all'
+
+	// annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
 	implementation 'org.postgresql:postgresql'
 	// runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
 	// runtimeOnly 'com.oracle.database.security:osdt_core'
@@ -41,11 +47,13 @@ dependencies {
 
 	// AWS Secrets Manager
 	// https://refactorfirst.com/spring-boot-fetch-secrets-from-aws-secrets-manager
-	implementation 'io.awspring.cloud:spring-cloud-aws-dependencies:3.3.0'
-	implementation 'io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:3.3.0'
+	// implementation 'io.awspring.cloud:spring-cloud-aws-dependencies:3.3.0'
+	// implementation 'io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:3.3.0'
 	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	
 }
 
 tasks.named('test') {
