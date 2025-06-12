@@ -65,7 +65,7 @@ class OrderApplicationTest {
         LocalDate localDate = LocalDate.now();
         libro.setPublication_date(localDate.plusDays(1));
         assertThat(this.restTemplate.postForObject("http://localhost:" + port +
-                "/api/v1/libros", libro, Libro.class)).toString().contains("[");
+                "/api/v1/libros", libro, Libro.class));
     }
 
     @Test
