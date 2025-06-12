@@ -7,11 +7,16 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.time.LocalDate;
+
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import cl.dsy1103.order.controller.LibroController;
+import cl.dsy1103.order.model.Libro;
+import net.datafaker.Faker;
 
 // @SpringBootTest
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -46,6 +51,30 @@ class OrderApplicationTest {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port +
                 "/api/v1/libros",
                 String.class)).toString().contains("[");
+    }
+
+    @Test
+    @Order(4)
+    void postLibroReturns() throws Exception {
+        Libro libro = new Libro();
+        Faker faker = new Faker();
+        libro.setIsbn(faker.code().isbn13());
+        libro.setTitle(faker.book().title() + " Test4");
+        libro.setAuthor(faker.book().author());
+        libro.setPublisher(faker.book().publisher());
+        LocalDate localDate = LocalDate.now();
+        libro.setPublication_date(localDate.plusDays(1));
+        assertThat(this.restTemplate.postForObject("http://localhost:" + port +
+                "/api/v1/libros", libro, Libro.class)).toString().contains("[");
+    }
+
+    @Test
+    @Order(5)
+    void getLibros() throws Exception {
+        System.out.println("port: " + port);
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port +
+                "/api/v1/libros",
+                String.class)).toString().contains("Test4");
     }
 
     // @Test
