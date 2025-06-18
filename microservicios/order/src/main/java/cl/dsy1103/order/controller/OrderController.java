@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 
 import cl.dsy1103.order.model.Order;
 import cl.dsy1103.order.services.OrderService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @RequestMapping("/api/v1/order")
+@Tag(name = "Order API", description = "API para manejar ordenes en un restaurante. La base de datos es manipulada usando operaciones CRUD.")
 public class OrderController {
 
 	@Autowired
@@ -27,8 +31,11 @@ public class OrderController {
 	private int counter = 0;
 
 	@GetMapping("")
-	public List<Order> getOrders() {
-		return orderService.getOrders();
+	@Operation(summary = "Obtener todas las ordenes", description = "Retorna una lista de todas las ordenes en el sistema.")
+	@ApiResponse(responseCode = "200", description = "Operación exitosa")
+	public ResponseEntity<List<Order>> getOrders() {
+		List<Order> orders = orderService.getOrders();
+		return new ResponseEntity<>(orders, HttpStatus.OK);
 	}
 
 	// Create POST
