@@ -59,6 +59,9 @@ dependencies {
 
  	// https://springdoc.org/	
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.9'
+
+	// https://spring.io/projects/spring-hateoas
+	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
 }
 
 tasks.named('test') {
