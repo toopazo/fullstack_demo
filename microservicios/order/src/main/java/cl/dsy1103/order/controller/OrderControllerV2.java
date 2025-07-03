@@ -4,6 +4,7 @@ import java.util.stream.Collectors;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,8 @@ import cl.dsy1103.order.assemblers.OrderModelAssembler;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+// HAL = Hypertext Application Language,
+
 @RestController
 @RequestMapping("/api/v2/order")
 public class OrderControllerV2 {
@@ -45,9 +48,14 @@ public class OrderControllerV2 {
     }
 
     @GetMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
-    public EntityModel<Order> getOrderById(@PathVariable int id) {
+    public ResponseEntity<EntityModel<Order>> getOrderById(@PathVariable int id) {
         Order order = orderService.getOrderById(id);
-        return assembler.toModel(order);
+        if (order == null) {
+            return ResponseEntity.notFound().build();
+        } else if (order.getId() == 0) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return new ResponseEntity<>(assembler.toModel(order), HttpStatus.OK);
     }
 
     @PostMapping(produces = MediaTypes.HAL_JSON_VALUE)

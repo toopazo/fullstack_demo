@@ -4,26 +4,27 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
+// import org.springframework.web.client.RestClient;
 
 import cl.dsy1103.order.repository.LibroRepository;
 import cl.dsy1103.order.model.Libro;
-import cl.dsy1103.order.model.UFData;
+// import cl.dsy1103.order.model.UFData;
 
 @Service
 public class LibroService {
     @Autowired
     private LibroRepository libroRepository;
 
-    private final RestClient restClient;
+    // private final RestClient restClient;
 
-    public LibroService(RestClient.Builder restClientBuilder) {
-        this.restClient = restClientBuilder.baseUrl("https://mindicador.cl").build();
-    }
+    // public LibroService(RestClient.Builder restClientBuilder) {
+    // this.restClient = restClientBuilder.baseUrl("https://mindicador.cl").build();
+    // }
 
-    public UFData externalRestCall(String date) {
-        return this.restClient.get().uri("/api/uf/{name}", date).retrieve().body(UFData.class);
-    }
+    // public UFData externalRestCall(String date) {
+    // return this.restClient.get().uri("/api/uf/{name}",
+    // date).retrieve().body(UFData.class);
+    // }
 
     public List<Libro> getLibros() {
         // return libroRepository.getLibros();

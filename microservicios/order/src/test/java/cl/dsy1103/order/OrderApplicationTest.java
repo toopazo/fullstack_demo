@@ -9,9 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import cl.dsy1103.order.controller.LibroController;
@@ -72,9 +76,18 @@ class OrderApplicationTest {
     @Order(5)
     void getLibros() throws Exception {
         System.out.println("port: " + port);
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port +
+
+        String jsonString = this.restTemplate.getForObject("http://localhost:" + port +
                 "/api/v1/libros",
-                String.class)).toString().contains("Test4");
+                String.class);
+
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode jsonDict = mapper.readTree(jsonString);
+        System.out.println("jsonNode: " + jsonDict.toPrettyString());
+        System.out.println("jsonNode[0]: " + jsonDict.get(0).toPrettyString());
+        System.out.println("jsonNode[0][isbn]: " + jsonDict.get(0).get("isbn").toPrettyString());
+        assertThat(jsonDict.isArray()).isTrue();
+        assertThat(jsonDict.size()).isGreaterThan(0);
     }
 
     // @Test
