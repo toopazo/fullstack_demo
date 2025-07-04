@@ -38,13 +38,14 @@ public class OrderControllerV2 {
     private OrderModelAssembler assembler;
 
     @GetMapping(produces = MediaTypes.HAL_JSON_VALUE)
-    public CollectionModel<EntityModel<Order>> getAllOrders() {
+    public ResponseEntity<CollectionModel<EntityModel<Order>>> getAllOrders() {
         List<EntityModel<Order>> orders = orderService.getOrders().stream()
                 .map(assembler::toModel)
                 .collect(Collectors.toList());
 
-        return CollectionModel.of(orders,
-                linkTo(methodOn(OrderControllerV2.class).getAllOrders()).withSelfRel());
+        return ResponseEntity.ok(
+                CollectionModel.of(orders,
+                        linkTo(methodOn(OrderControllerV2.class).getAllOrders()).withSelfRel()));
     }
 
     @GetMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)

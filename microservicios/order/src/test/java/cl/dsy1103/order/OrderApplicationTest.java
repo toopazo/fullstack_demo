@@ -75,19 +75,17 @@ class OrderApplicationTest {
     @Test
     @Order(5)
     void getLibros() throws Exception {
-        System.out.println("port: " + port);
-
         String jsonString = this.restTemplate.getForObject("http://localhost:" + port +
                 "/api/v1/libros",
                 String.class);
 
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonDict = mapper.readTree(jsonString);
-        System.out.println("jsonNode: " + jsonDict.toPrettyString());
-        System.out.println("jsonNode[0]: " + jsonDict.get(0).toPrettyString());
-        System.out.println("jsonNode[0][isbn]: " + jsonDict.get(0).get("isbn").toPrettyString());
-        assertThat(jsonDict.isArray()).isTrue();
-        assertThat(jsonDict.size()).isGreaterThan(0);
+        JsonNode jsonNode = mapper.readTree(jsonString);
+        System.out.println("jsonNode: " + jsonNode.toPrettyString());
+        System.out.println("jsonNode[0]: " + jsonNode.get(0).toPrettyString());
+        System.out.println("jsonNode[0][isbn]: " + jsonNode.get(0).get("isbn").toPrettyString());
+        assertThat(jsonNode.isArray()).isTrue();
+        assertThat(jsonNode.size()).isGreaterThan(0);
     }
 
     // @Test
